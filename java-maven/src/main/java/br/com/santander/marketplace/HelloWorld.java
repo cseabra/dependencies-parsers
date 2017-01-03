@@ -1,4 +1,4 @@
-package br.com.santander.marketplace;
+package br.com.cseabra.marketplace;
 
 public class HelloWorld {
 

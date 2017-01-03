@@ -4,11 +4,11 @@
 ![MKT](https://img.shields.io/badge/version-v1.0.0-blue.svg)
 ![MKT](https://img.shields.io/badge/language-C#-orange.svg)
 ![MKT](https://img.shields.io/badge/platform-Windows Phone-lightgrey.svg)
-[![MKT](https://img.shields.io/badge/license-Santander-red.svg)](./LICENSE)
+[![MKT](https://img.shields.io/badge/license-cseabra-red.svg)](./LICENSE)
 
 # Description
 
-This document serves as a sample for readme.md documents and how they should look like in order to be compatible with Santander Marketplace.
+This document serves as a sample for readme.md documents and how they should look like in order to be compatible with cseabra Marketplace.
 
 **Features**
 

@@ -14,7 +14,7 @@
     "express",
     "structure"
   ],
-  "author": "Santander Brasil",
+  "author": "cseabra Brasil",
   "dependencies": {
     "express": "^4.9.5",
     "jade": "^1.7.0"

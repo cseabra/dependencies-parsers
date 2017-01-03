@@ -1,4 +1,4 @@
-package com.example.santander.sampleapplication;
+package com.example.cseabra.sampleapplication;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
