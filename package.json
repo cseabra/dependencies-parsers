@@ -1,0 +1,16 @@
+{
+  "name": "dependencies-parsers",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Claudio Seabra",
+  "license": "ISC",
+  "dependencies": {
+    "bluebird": "^3.4.7",
+    "gradlejs": "^1.0.0",
+    "pom-parser": "^1.1.1"
+  }
+}
