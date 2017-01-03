@@ -10,7 +10,7 @@ npm i dependencies-parsers --save
 var parsers = require('dependencies-parsers');
 
 //Parse a pom file
-parsers.pomXmlParser(__dirname + '/java-maven/pom.xml')
+parsers.parsePomXml(__dirname + '/java-maven/pom.xml')
     .then(function (obj) {
         console.log(obj.prjId);
         console.log(obj.deps);
@@ -21,7 +21,7 @@ parsers.pomXmlParser(__dirname + '/java-maven/pom.xml')
 
 
 //Parse a package.json file
-parsers.packageJsonParser(__dirname + '/nodejs-npm/package.json')
+parsers.parsePackageJson(__dirname + '/nodejs-npm/package.json')
     .then(function (obj) {
         console.log(obj.prjId);
         console.log(obj.deps);
@@ -31,7 +31,7 @@ parsers.packageJsonParser(__dirname + '/nodejs-npm/package.json')
     });
 
 //Parse a build.gradle file
-parsers.buildGradleParser(__dirname + '/android-gradle/app/build.gradle')
+parsers.parseBuildGradle(__dirname + '/android-gradle/app/build.gradle')
     .then(function (obj) {
         console.log(obj.prjId);
         console.log(obj.deps);

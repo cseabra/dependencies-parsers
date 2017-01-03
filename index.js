@@ -5,7 +5,13 @@ var packageJsonParserAsync = Promise.promisifyAll(require('./package-json-parser
 var buildGradleParserAsync = require('./build-gradle-parser');
 
 module.exports = {
-    pomXmlParser : pomParserAsync.getDependenciesAsync,
-    packageJsonParser : packageJsonParserAsync.getDependenciesAsync,
-    buildGradleParser : buildGradleParserAsync.getDependenciesAsync
+    parsePomXml :  function(pathPom){
+        return pomParserAsync.getDependenciesAsync(pathPom);
+    },
+    parsePackageJson : function(pathPackageJson){
+        return packageJsonParserAsync.getDependenciesAsync(pathPackageJson);
+    },
+    parseBuildGradle : function(pathBuildGradleParser){
+        return buildGradleParserAsync.getDependenciesAsync(pathBuildGradleParser);        
+    }
 };
