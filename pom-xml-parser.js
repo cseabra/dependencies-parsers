@@ -45,18 +45,18 @@ function getDependencies(pomPath, cb){
         var result = {
             deps: deps,
             prjId: ''
-        };
+        };        
+
+        result.prjId = pomResponse.pomObject.project.groupid + "#" + pomResponse.pomObject.project.artifactid + "#" + pomResponse.pomObject.project.version;
 
         if(!pomResponse.pomObject.project.dependencies) {
             cb(null, result);
             return;
         }
 
-        var dependencies = pomResponse.pomObject.project.dependencies.dependency;
-
-        result.prjId = pomResponse.pomObject.project.groupid + "#" + pomResponse.pomObject.project.artifactid + "#" + pomResponse.pomObject.project.version;
-
         try{
+            var dependencies = pomResponse.pomObject.project.dependencies.dependency;
+            
             for(var i in dependencies){
                 var dependency = dependencies[i];
 
