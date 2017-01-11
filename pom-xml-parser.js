@@ -28,14 +28,14 @@ var pomParser = require("pom-parser");
  * });
  * 
  */
-function getDependencies(pomPath, cb){
+function getDependencies(pomPath, cb) {
     // The required options, including the filePath. 
     // Other parsing options from https://github.com/Leonidas-from-XIV/node-xml2js#options 
     var opts = {
         filePath: pomPath, // The path to a pom file 
     };
     // Parse the pom based on a path 
-    pomParser.parse(opts, function(err, pomResponse) {
+    pomParser.parse(opts, function (err, pomResponse) {
         if (err) {
             cb(err, []);
             return;
@@ -45,22 +45,25 @@ function getDependencies(pomPath, cb){
         var result = {
             deps: deps,
             prjId: ''
-        };        
+        };
 
         result.prjId = pomResponse.pomObject.project.groupid + "#" + pomResponse.pomObject.project.artifactid + "#" + pomResponse.pomObject.project.version;
 
-        if(!pomResponse.pomObject.project.dependencies) {
+        if (!pomResponse.pomObject.project.dependencies) {
             cb(null, result);
             return;
         }
 
-        try{
+        try {
             var dependencies = pomResponse.pomObject.project.dependencies.dependency;
-            
-            for(var i in dependencies){
-                var dependency = dependencies[i];
 
-                deps.push(getIdDependencyFromPom(dependency, pomResponse.pomObject.project.properties));
+            if (dependencies.length) {
+                for (var i in dependencies) {
+                    var dependency = dependencies[i];
+                    deps.push(getIdDependencyFromPom(dependency, pomResponse.pomObject.project.properties));
+                }
+            } else {
+                deps.push(getIdDependencyFromPom(dependencies, pomResponse.pomObject.project.properties));
             }
             cb(null, result);
         } catch (err) {
@@ -75,12 +78,12 @@ function getDependencies(pomPath, cb){
  * @param properties: Um objeto com com as propriedades do pom
  * @return Retorna um id no formato: groupid#artifactid#version
  */
-function getIdDependencyFromPom(dependency, properties){
-    if(!dependency) throw new Error("O argumento dependency não pode estar vazio");
+function getIdDependencyFromPom(dependency, properties) {
+    if (!dependency) throw new Error("O argumento dependency não pode estar vazio");
 
     var temTodasAsPropriedades = dependency.artifactid && dependency.groupid && dependency.version;
-    
-    if(!temTodasAsPropriedades) throw new Error("As propriedades artifactid, groupid e version são obrigatórios numa dependência maven.");
+
+    if (!temTodasAsPropriedades) throw new Error("As propriedades artifactid, groupid e version são obrigatórios numa dependência maven.");
 
     //Se contém '${' pega informações do properties
     var versionNumber = getVersionNumber(dependency.version, properties);
@@ -92,12 +95,12 @@ function getIdDependencyFromPom(dependency, properties){
  * @prop propriedade no formato ${NOME_PROPRIEDADE}
  * returns Retorna apenas o nome da propriedade sem o dólar e as chaves
  */
-function getVersionNumber(version, properties){
-    if(version.indexOf('${') != -1){
-        if(!properties) throw new Error("O nó propertie não está definido.");
-        
+function getVersionNumber(version, properties) {
+    if (version.indexOf('${') != -1) {
+        if (!properties) throw new Error("O nó propertie não está definido.");
+
         version = version.replace('${', '').replace('}', '');
-        if(!properties[version]) throw new Error("Não foi possível encontrar a propriedade no pom.xml: ${" + version + "}");
+        if (!properties[version]) throw new Error("Não foi possível encontrar a propriedade no pom.xml: ${" + version + "}");
         version = properties[version];
     }
 
