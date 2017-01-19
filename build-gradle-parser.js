@@ -12,12 +12,14 @@ function getDependenciesAsync(buildGradlePath) {
         var prjId = representation.android.defaultConfig.applicationId.replace(/"/g, "") + "#" + representation.android.defaultConfig.versionName.replace(/"/g, "");
         var dependencies = [];
 
-        for (var i in representation.dependencies.compile) {
-          var dependency = representation.dependencies.compile[i].replace(/'/g, "").replace(/\\/g, "").replace(/:/g, "#");
+        if(Array.isArray(representation.dependencies.compile.length)){
+          for (var i in representation.dependencies.compile) {
+            var dependency = representation.dependencies.compile[i].replace(/'/g, "").replace(/\\/g, "").replace(/:/g, "#");
 
-          //Se não tem espaços
-          if (dependency.indexOf(" ") == -1) {
-            dependencies.push(dependency);
+            //Se não tem espaços
+            if (dependency.indexOf(" ") == -1) {
+              dependencies.push(dependency);
+            }
           }
         }
 
