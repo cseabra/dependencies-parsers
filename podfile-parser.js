@@ -10,8 +10,8 @@ module.exports = {
  */
 function getDependencies(podfilePath, cb) {
     var podParser =
-        podfilePath.endsWith('Podfile') ? Podfile :
-            (podfilePath.endsWith('.podspec') ? Podspec : undefined);
+        endsWith(podfilePath, 'Podfile') ? Podfile :
+            (endsWith(podfilePath, '.podspec') ? Podspec : undefined);
 
     if (!podParser) {
         cb('Apenas arquivos Pofile ou podspec podem ser interpretados', null);
@@ -179,6 +179,9 @@ function getDependency(prefix, line) {
         .split('~>');
 }
 
+function endsWith(str, suffix) {
+    return str.indexOf(suffix, str.length - suffix.length) !== -1;
+};
 
 
 
@@ -186,7 +189,7 @@ function getDependency(prefix, line) {
 
 
 //tests
-/*
+
 getDependencies('/Users/cseabra/codes/mine/dependencies-parser/ios-cocoapods/Podfile', function (err, prj) {
     if (err) {
         console.log(err);
@@ -205,4 +208,4 @@ getDependencies('/Users/cseabra/codes/mine/dependencies-parser/ios-cocoapods/ios
 
     console.log(" *********** PODSPEC")
     console.log(prj);
-});*/
+});
