@@ -144,6 +144,7 @@ function Podfile(content) {
 }
 
 function cleanString(str) {
+    if(!str) return '';
     return str
         .replace(/\s/g, '') // remove todos os espacos
         .replace(/'/g, '') // remove todos os apostrofos
@@ -155,6 +156,7 @@ function cleanString(str) {
 }
 
 function cleanString2(str) {
+    if(!str) return '';
     return str
         .replace(/'/g, '') // remove todos os apostrofos
         .replace(/"/g, '') // remove todas as aspas
