@@ -3,6 +3,7 @@ var Promise = require('bluebird');
 var pomParserAsync = Promise.promisifyAll(require('./pom-xml-parser'));
 var packageJsonParserAsync = Promise.promisifyAll(require('./package-json-parser'));
 var buildGradleParserAsync = require('./build-gradle-parser');
+var podfileParserAsync = Promise.promisifyAll(require('./podfile-parser'));
 
 module.exports = {
     parsePomXml :  function(pathPom){
@@ -13,5 +14,8 @@ module.exports = {
     },
     parseBuildGradle : function(pathBuildGradleParser){
         return buildGradleParserAsync.getDependenciesAsync(pathBuildGradleParser);        
+    },
+    parsePodfileOrPodspecfile : function(pathPodfileOrPodspec){
+        return podfileParserAsync.getDependenciesAsync(pathPodfileOrPodspec);        
     }
 };
