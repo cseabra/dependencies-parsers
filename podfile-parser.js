@@ -189,7 +189,7 @@ function endsWith(str, suffix) {
 
 
 //tests
-
+/*
 getDependencies('/Users/cseabra/codes/mine/dependencies-parser/ios-cocoapods/Podfile', function (err, prj) {
     if (err) {
         console.log(err);
@@ -208,4 +208,4 @@ getDependencies('/Users/cseabra/codes/mine/dependencies-parser/ios-cocoapods/ios
 
     console.log(" *********** PODSPEC")
     console.log(prj);
-});
+});*/
