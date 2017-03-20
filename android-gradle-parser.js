@@ -9,7 +9,9 @@ module.exports = {
 function getDependencies(rootPath, cb) {
   getPaths(rootPath, function (err, paths) {
     readDependencies(paths, 0, [], function (err, result) {
-      var prjId = rootPath.substr(rootPath.lastIndexOf('/') + 1, rootPath.length) + '#' + result.version;
+      var prjId = result.version;
+      if(result.version.split('#').length < 2)
+        prjId = rootPath.substr(rootPath.lastIndexOf('/') + 1, rootPath.length) + '#' + result.version;        
       cb(err, { prjId: prjId, deps: result.deps });
     });
   });
@@ -75,7 +77,10 @@ function readDependencies(paths, i, deps, cb, version) {
 
   g2js.parseFile(buildGradle).then(function (representation) {
     try {
-      version = (version || '') + representation.android.defaultConfig.versionName.replace(/"/g, "");//representation.android.defaultConfig.applicationId.replace(/"/g, "") + "#" + representation.android.defaultConfig.versionName.replace(/"/g, "");
+      if(!version && representation.android.defaultConfig.applicationId){
+        version = representation.android.defaultConfig.applicationId.replace(/"/g, "");
+      }
+      version = version ? version + '#' + representation.android.defaultConfig.versionName.replace(/"/g, "") : representation.android.defaultConfig.versionName.replace(/"/g, "");
 
       if (Array.isArray(representation.dependencies.compile)) {
         for (var i in representation.dependencies.compile) {
